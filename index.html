@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LuckySevenStudio — A 777-Inspired Design Studio for iPhone</title>
+<meta name="description" content="LuckySevenStudio is a creative design tool for iPhone that turns the 777 motif into a visual language for composition, color, and rhythm. No wagering, no outcomes — just a beautiful space to compose." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0613;
+    --bg-2: #14101f;
+    --ink: #f6f1e3;
+    --ink-dim: #b9b0a0;
+    --gold: #d4af37;
+    --gold-2: #f5d76e;
+    --crimson: #8a1c2b;
+    --line: rgba(212, 175, 55, 0.25);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: radial-gradient(1200px 600px at 50% -10%, #1c1330 0%, var(--bg) 60%) var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+  }
+  a { color: var(--gold-2); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  /* Nav */
+  header.nav {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(14px);
+    background: rgba(11, 6, 19, 0.7);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .brand { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 22px; letter-spacing: 0.04em; }
+  .brand span { color: var(--gold-2); }
+  nav ul { list-style: none; display: flex; gap: 28px; margin: 0; padding: 0; }
+  nav a { color: var(--ink-dim); font-size: 14px; letter-spacing: 0.05em; text-transform: uppercase; }
+  nav a:hover { color: var(--ink); text-decoration: none; }
+  .cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-2) 100%);
+    color: #1a1208; padding: 10px 18px; border-radius: 999px;
+    font-weight: 600; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .cta:hover { text-decoration: none; transform: translateY(-1px); transition: transform .2s ease; }
+
+  /* Hero */
+  .hero { padding: 88px 0 72px; text-align: center; position: relative; overflow: hidden; }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: clamp(40px, 7vw, 76px);
+    line-height: 1.05; margin: 0 0 18px;
+    letter-spacing: -0.01em;
+  }
+  .hero h1 .accent { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-2) 60%, #fff3b0 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero p.tagline { font-size: 18px; color: var(--ink-dim); max-width: 720px; margin: 0 auto 32px; line-height: 1.6; }
+  .hero .badges { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .badge {
+    border: 1px solid var(--line);
+    background: rgba(20, 16, 31, 0.6);
+    color: var(--ink-dim);
+    padding: 8px 14px; border-radius: 999px;
+    font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .sevens { display: flex; justify-content: center; gap: 10px; margin: 36px 0 0; font-family: 'Cormorant Garamond', serif; font-size: 28px; color: var(--gold); opacity: .9; }
+  .sevens span { animation: float 3s ease-in-out infinite; }
+  .sevens span:nth-child(2) { animation-delay: .2s; }
+  .sevens span:nth-child(3) { animation-delay: .4s; }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+
+  /* Sections */
+  section.block { padding: 72px 0; border-top: 1px solid var(--line); }
+  section.block h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 4vw, 42px);
+    margin: 0 0 12px; letter-spacing: -0.01em;
+  }
+  section.block .lede { color: var(--ink-dim); max-width: 720px; line-height: 1.7; margin: 0 0 40px; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; }
+  .card {
+    background: linear-gradient(180deg, rgba(20, 16, 31, 0.85) 0%, rgba(11, 6, 19, 0.85) 100%);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 26px;
+    transition: transform .25s ease, border-color .25s ease;
+  }
+  .card:hover { transform: translateY(-3px); border-color: var(--gold); }
+  .card .glyph {
+    width: 52px; height: 52px; display: grid; place-items: center;
+    background: linear-gradient(135deg, rgba(212,175,55,.18), rgba(212,175,55,.04));
+    border: 1px solid var(--line); border-radius: 14px;
+    font-family: 'Cormorant Garamond', serif; font-size: 26px; color: var(--gold-2);
+    margin-bottom: 16px;
+  }
+  .card h3 { font-size: 18px; margin: 0 0 8px; letter-spacing: 0.02em; }
+  .card p { color: var(--ink-dim); font-size: 14px; line-height: 1.65; margin: 0; }
+
+  /* Showcase */
+  .showcase {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;
+  }
+  .tile {
+    aspect-ratio: 9 / 16;
+    border-radius: 18px;
+    border: 1px solid var(--line);
+    background: linear-gradient(160deg, #1a1230 0%, #2a1a3d 50%, #0b0613 100%);
+    display: grid; place-items: center;
+    position: relative; overflow: hidden;
+  }
+  .tile::before {
+    content: ""; position: absolute; inset: -20% -20%; background:
+      radial-gradient(circle at 30% 30%, rgba(212,175,55,.25), transparent 40%),
+      radial-gradient(circle at 70% 70%, rgba(138,28,43,.35), transparent 40%);
+    animation: drift 12s linear infinite;
+  }
+  @keyframes drift { from { transform: rotate(0deg);} to { transform: rotate(360deg);} }
+  .tile span { position: relative; font-family: 'Cormorant Garamond', serif; font-size: 64px; color: var(--gold-2); text-shadow: 0 4px 24px rgba(0,0,0,.4); }
+
+  /* Principles */
+  .principles { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+  .princ { padding: 22px; border-left: 2px solid var(--gold); }
+  .princ h4 { margin: 0 0 6px; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-2); }
+  .princ p { color: var(--ink-dim); font-size: 14px; line-height: 1.6; margin: 0; }
+
+  /* Footer */
+  footer { border-top: 1px solid var(--line); padding: 48px 0; margin-top: 64px; color: var(--ink-dim); font-size: 13px; }
+  .foot { display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: 32px; }
+  .foot h5 { color: var(--ink); margin: 0 0 14px; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .foot ul { list-style: none; padding: 0; margin: 0; }
+  .foot li { margin: 8px 0; }
+  .legal { margin-top: 28px; padding-top: 20px; border-top: 1px dashed var(--line); }
+  .legal p { margin: 8px 0; line-height: 1.7; }
+
+  @media (max-width: 720px) {
+    nav ul { display: none; }
+    .foot { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <div class="brand">Lucky<span>Seven</span>Studio</div>
+    <nav>
+      <ul>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#craft">Craft</a></li>
+        <li><a href="#principles">Principles</a></li>
+        <li><a href="support.html">Support</a></li>
+      </ul>
+    </nav>
+    <a class="cta" href="support.html">Get Support</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>A 777-Inspired <span class="accent">Design Studio</span></h1>
+    <p class="tagline">
+      LuckySevenStudio reimagines the 777 motif as a visual language — for composition, color, and rhythm.
+      Six carefully crafted tools. All on device. All without an account.
+    </p>
+    <div class="badges">
+      <span class="badge">For iPhone</span>
+      <span class="badge">On-device Archive</span>
+      <span class="badge">No Tracking</span>
+      <span class="badge">No Sign-in</span>
+    </div>
+    <div class="sevens"><span>7</span><span>7</span><span>7</span></div>
+  </div>
+</section>
+
+<section class="block" id="tools">
+  <div class="wrap">
+    <h2>Six Tools, One Visual Language</h2>
+    <p class="lede">
+      Each module treats 777 as a creative grammar — reels, wheels, symbols, numbers, grids, and photographs.
+      Nothing here is a game of chance with monetary value. Everything is a study in form.
+    </p>
+    <div class="grid">
+      <article class="card">
+        <div class="glyph">◐</div>
+        <h3>Reel Composer</h3>
+        <p>Spin three classic reels across endless three-row arrangements. Save the combinations that catch your eye.</p>
+      </article>
+      <article class="card">
+        <div class="glyph">◉</div>
+        <h3>Fortune Wheel Studio</h3>
+        <p>Build a circular composition with eight customizable symbol segments and a handcrafted rotating wheel.</p>
+      </article>
+      <article class="card">
+        <div class="glyph">№</div>
+        <h3>Lucky Number Visualizer</h3>
+        <p>Generate numeric tapestries with live distribution stats, a 30-entry history, and configurable ranges.</p>
+      </article>
+      <article class="card">
+        <div class="glyph">✦</div>
+        <h3>Symbol Studio</h3>
+        <p>Diamonds, crowns, horseshoes, clovers — curate a personal study sheet with rarity tiers and per-symbol notes.</p>
+      </article>
+      <article class="card">
+        <div class="glyph">▦</div>
+        <h3>Pattern Canvas</h3>
+        <p>Free-form 5×5 grid for free-flow compositions with place, erase, and fill-all modes.</p>
+      </article>
+      <article class="card">
+        <div class="glyph">▣</div>
+        <h3>Visual Studio</h3>
+        <p>Camera capture and photo import plus seven 777-inspired aesthetic filters with captions and tags.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="craft">
+  <div class="wrap">
+    <h2>Crafted in Midnight &amp; Gold</h2>
+    <p class="lede">
+      A visual identity rooted in classic slot aesthetics: deep midnight violet, brushed gold, and a single accent of crimson.
+      Every screen is composed in this palette — typography, spacing, and motion tuned for iPhone.
+    </p>
+    <div class="showcase">
+      <div class="tile"><span>7</span></div>
+      <div class="tile"><span>♦</span></div>
+      <div class="tile"><span>✦</span></div>
+      <div class="tile"><span>♛</span></div>
+      <div class="tile"><span>♣</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="principles">
+  <div class="wrap">
+    <h2>What LuckySevenStudio Is — and Isn't</h2>
+    <p class="lede">
+      LuckySevenStudio is a design tool, not a gambling product. No real-money stakes. No wagers. No payouts.
+      No outcomes of chance with monetary value. Local storage only.
+    </p>
+    <div class="principles">
+      <div class="princ">
+        <h4>No Wagering</h4>
+        <p>Nothing you compose can be staked, bet, or redeemed for value. Every tool is for study and composition.</p>
+      </div>
+      <div class="princ">
+        <h4>No Account</h4>
+        <p>No sign-in. No email. No third-party login. Open the app and start composing.</p>
+      </div>
+      <div class="princ">
+        <h4>No Tracking</h4>
+        <p>No analytics. No advertising identifiers. No cross-app tracking. Your work stays on your iPhone.</p>
+      </div>
+      <div class="princ">
+        <h4>Compassion First</h4>
+        <p>If gambling has affected you or someone you know, contact the National Council on Problem Gambling at 1-800-522-4700 (US) or visit gambleaware.org (UK).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <h5>LuckySevenStudio</h5>
+        <p>A 777-Inspired Design Studio for iPhone.<br>Made by an independent creator.</p>
+      </div>
+      <div>
+        <h5>Product</h5>
+        <ul>
+          <li><a href="#tools">Tools</a></li>
+          <li><a href="#craft">Craft</a></li>
+          <li><a href="#principles">Principles</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Support</h5>
+        <ul>
+          <li><a href="support.html">Contact &amp; Help</a></li>
+          <li><a href="mailto:a45984849@gmail.com">a45984849@gmail.com</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <p>&copy; <span id="year"></span> LuckySevenStudio. All rights reserved.</p>
+      <p>LuckySevenStudio is a design and composition tool. It contains no gambling functionality and offers no opportunity to wager or win money or money-equivalent prizes. If you or someone you know is affected by problem gambling, please contact the National Council on Problem Gambling (1-800-522-4700, US) or visit gambleaware.org (UK).</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
